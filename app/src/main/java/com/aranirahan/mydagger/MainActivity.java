@@ -4,6 +4,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.aranirahan.mydagger.component.BattleComponent;
+import com.aranirahan.mydagger.component.DaggerBattleComponent;
+import com.aranirahan.mydagger.module.BraavosModule;
+import com.aranirahan.mydagger.module.Cash;
+import com.aranirahan.mydagger.module.Soldiers;
+
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -14,11 +20,17 @@ public class MainActivity extends AppCompatActivity {
 //        setContentView(R.layout.activity_main);
 //        war.prepare();
 //        war.report();
+        Cash cash = new Cash();
+        Soldiers soldiers = new Soldiers();
 
-        BattleComponent component = DaggerBattleComponent.create();
+        BattleComponent component = DaggerBattleComponent
+                .builder().braavosModule(new BraavosModule(cash, soldiers)).build();
         War war = component.getWar();
         war.prepare();
         war.report();
+
+        component.getCash();
+        component.getSoldiers();
 
     }
 }
