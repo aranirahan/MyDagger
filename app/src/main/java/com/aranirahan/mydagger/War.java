@@ -1,5 +1,7 @@
 package com.aranirahan.mydagger;
 
+import javax.inject.Inject;
+
 public class War {
     private Starks starks;
     private Boltons boltons;
@@ -15,6 +17,7 @@ public class War {
 //        boltons.reportForWar();
 //    }
 
+    @Inject
     public War(Starks starks, Boltons boltons){
         this.starks = starks;
         this.boltons = boltons;
